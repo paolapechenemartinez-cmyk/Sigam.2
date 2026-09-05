@@ -1,0 +1,10 @@
+<div class="form-box danger">
+  <h2>Eliminar Rol</h2>
+
+  <p>¿Seguro que quieres eliminar el rol <strong>{{ nombre }}</strong>?</p>
+
+  <div class="actions">
+    <button class="btn-delete" (click)="eliminar()">Eliminar</button>
+    <button class="btn-cancel" (click)="cancelar.emit()">Cancelar</button>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+.container {
+  max-width: 640px;
+  margin: 40px auto;
+  padding: 28px;
+  background: #f3f4f6;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(31, 41, 55, 0.12);
+}
+
+h2 {
+  margin: 0 0 20px;
+  color: #1f2937;
+  font-size: 2rem;
+}
+
+.role-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  background: #ffffff;
+}
+
+.role-card p {
+  margin: 0;
+  font-size: 1rem;
+  color: #374151;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.btn-update {
+  background: #f59e0b;
+  color: #111827;
+}
+
+.btn-delete {
+  background: #4b5563;
+  color: #ffffff;
+}

@@ -1,0 +1,10 @@
+<div class="form-box">
+  <h2>Actualizar Rol</h2>
+
+  <input [(ngModel)]="nombre" placeholder="Nuevo nombre">
+
+  <div class="actions">
+    <button class="btn-confirm" (click)="actualizar()">Guardar</button>
+    <button class="btn-cancel" (click)="cancelar.emit()">Cancelar</button>
+  </div>
+</div>
