@@ -1,11 +1,9 @@
-.form-box {
+.formulario {
   max-width: 420px;
   margin: 20px auto;
-  padding: 24px;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #d6d6d6;
   background: white;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
 h2 {
@@ -16,23 +14,21 @@ h2 {
 input {
   width: 100%;
   box-sizing: border-box;
-  padding: 10px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid #cccccc;
   margin-bottom: 16px;
 }
 
-.actions {
+.botones {
   display: flex;
   gap: 12px;
 }
 
 button {
   border: none;
-  border-radius: 8px;
-  padding: 10px 14px;
+  border-radius: 2px;
+  padding: 8px 12px;
   cursor: pointer;
-  font-weight: 600;
 }
 
 .btn-confirm {

@@ -1,29 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-
-interface Usuario {
-  id: number;
-  nombre: string;
-  email: string;
-}
+import { FormsModule } from '@angular/forms';
+import { RolesService, Usuario } from './roles/roles.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   template: `
     <div class="container">
-      <h2>Usuarios</h2>
+      <h2>Lista de usuarios</h2>
+      <p class="mensaje" *ngIf="mensaje">{{ mensaje }}</p>
 
-      <div class="usuario" *ngFor="let usuario of usuarios">
-        <div class="info">
-          <strong>{{ usuario.nombre }}</strong>
-          <span>{{ usuario.email }}</span>
-        </div>
+      <div class="encabezado">
+        <span>ID</span>
+        <span>Nombre</span>
+        <span>Correo</span>
+        <span>Teléfono</span>
+        <span>Acciones</span>
+      </div>
 
+      <div class="fila" *ngFor="let usuario of usuarios">
+        <span>{{ usuario.id }}</span>
+        <input [(ngModel)]="usuario.nombre" />
+        <input [(ngModel)]="usuario.correo" type="email" />
+        <input [(ngModel)]="usuario.telefono" />
         <div class="acciones">
-          <button class="update" (click)="actualizarUsuario(usuario.id)">Actualizar</button>
+          <button class="update" (click)="actualizarUsuario(usuario.id, usuario)">Actualizar</button>
           <button class="delete" (click)="eliminarUsuario(usuario.id)">Eliminar</button>
         </div>
       </div>
@@ -40,55 +43,55 @@ interface Usuario {
       }
 
       .container {
-        max-width: 760px;
+        max-width: 1100px;
         margin: 0 auto;
         background: white;
         border: 1px solid #d6d6d6;
-        padding: 22px;
+        padding: 20px;
       }
 
       h2 {
-        margin: 0 0 18px;
+        margin: 0 0 16px;
         color: #f57c00;
-        font-size: 24px;
+        font-size: 22px;
       }
 
-      .usuario {
-        display: flex;
-        justify-content: space-between;
+      .encabezado,
+      .fila {
+        display: grid;
+        grid-template-columns: 60px 1.2fr 1.8fr 1.1fr 220px;
         align-items: center;
-        border-top: 1px solid #dddddd;
-        padding: 14px 4px;
-        gap: 16px;
+        gap: 12px;
+        padding: 10px 6px;
       }
 
-      .info {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
+      .encabezado {
+        background: #eeeeee;
+        border-top: 1px solid #cccccc;
+        border-bottom: 1px solid #cccccc;
+        color: #555555;
+        font-size: 13px;
+        font-weight: bold;
       }
 
-      .info strong {
-        color: #111827;
-      }
-
-      .info span {
-        color: #6b7280;
-        font-size: 0.9rem;
-      }
-
-      .acciones {
-        display: flex;
-        gap: 8px;
+      .fila {
+        min-height: 44px;
+        border-bottom: 1px solid #dddddd;
+        color: #222222;
       }
 
       button {
         border: none;
-        border-radius: 3px;
-        padding: 7px 10px;
+        border-radius: 2px;
+        padding: 8px 10px;
         cursor: pointer;
-        font-size: 0.85rem;
+        font-size: 13px;
         color: white;
+      }
+
+      .acciones {
+        display: flex;
+        gap: 6px;
       }
 
       .update {
@@ -101,48 +104,40 @@ interface Usuario {
     `,
   ],
 })
-export class App {
-  private readonly apiUrl = 'http://127.0.0.1:8000/usuarios';
+export class App implements OnInit {
+  usuarios: Usuario[] = [];
+  mensaje = '';
 
-  usuarios: Usuario[] = [
-    { id: 1, nombre: 'Ana García', email: 'ana@email.com' },
-    { id: 2, nombre: 'Luis Pérez', email: 'luis@email.com' },
-    { id: 3, nombre: 'María López', email: 'maria@email.com' },
-    { id: 4, nombre: 'Carlos Rodríguez', email: 'carlos@email.com' },
-    { id: 5, nombre: 'Sofía Martínez', email: 'sofia@email.com' },
-    { id: 6, nombre: 'Diego Torres', email: 'diego@email.com' },
-    { id: 7, nombre: 'Valentina Gómez', email: 'valentina@email.com' },
-    { id: 8, nombre: 'Jorge Ramírez', email: 'jorge@email.com' },
-    { id: 9, nombre: 'Camila Herrera', email: 'camila@email.com' },
-    { id: 10, nombre: 'Andrés Castro', email: 'andres@email.com' },
-  ];
+  constructor(private rolesService: RolesService) {}
 
-  constructor(private http: HttpClient) {}
+  ngOnInit() {
+    this.cargarUsuarios();
+  }
 
-  actualizarUsuario(id: number) {
-    const usuario = this.usuarios.find(u => u.id === id);
+  cargarUsuarios() {
+    this.rolesService.listarRoles().subscribe({
+      next: usuarios => this.usuarios = usuarios,
+      error: error => console.error('No se pudieron cargar los usuarios', error),
+    });
+  }
 
-    if (usuario) {
-      const usuarioActualizado = {
-        ...usuario,
-        nombre: `${usuario.nombre} actualizado`,
-      };
-
-      this.http.put<Usuario>(`${this.apiUrl}/${id}/`, usuarioActualizado).subscribe({
-        next: respuesta => {
-          this.usuarios = this.usuarios.map(item => item.id === id ? respuesta : item);
-        },
-        error: error => console.error('No se pudo actualizar el usuario', error),
-      });
-    }
+  actualizarUsuario(id: number, usuario: Usuario) {
+    this.rolesService.actualizarRol(id, usuario).subscribe({
+      next: respuesta => {
+        this.usuarios = this.usuarios.map(item => item.id === id ? respuesta : item);
+        this.mensaje = 'Usuario actualizado';
+      },
+      error: error => this.mensaje = error.error?.detail || 'No se pudo actualizar el usuario',
+    });
   }
 
   eliminarUsuario(id: number) {
-    this.http.delete(`${this.apiUrl}/${id}/`).subscribe({
+    this.rolesService.eliminarRol(id).subscribe({
       next: () => {
         this.usuarios = this.usuarios.filter(usuario => usuario.id !== id);
+        this.mensaje = 'Usuario eliminado';
       },
-      error: error => console.error('No se pudo eliminar el usuario', error),
+      error: error => this.mensaje = error.error?.detail || 'No se pudo eliminar el usuario',
     });
   }
 }

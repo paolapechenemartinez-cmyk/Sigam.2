@@ -42,7 +42,8 @@ class CrearUsuario(APIView):
 
         serializer = UsuarioSerializer(
             usuario,
-            data=request.data
+            data=request.data,
+            partial=True
         )
 
         if serializer.is_valid():

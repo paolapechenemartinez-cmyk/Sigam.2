@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-roles-eliminar',
@@ -8,13 +8,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   imports: [],
 })
 export class RolesEliminar {
-  @Input() id = 1;
-  @Input() nombre = '';
-
-  @Output() confirmarEliminar = new EventEmitter<void>();
-  @Output() cancelar = new EventEmitter<void>();
+  id = 1;
+  nombre = 'juan';
 
   eliminar() {
-    this.confirmarEliminar.emit();
+    this.nombre = 'maria';
+  }
+
+  cancelar() {
+    this.nombre = '';
   }
 }

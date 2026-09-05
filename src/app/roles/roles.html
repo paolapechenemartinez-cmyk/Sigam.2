@@ -2,8 +2,10 @@
   <h2>Roles</h2>
 
   <div class="role-card" *ngFor="let rol of roles">
-    <p>{{ rol.nombre }}</p>
-    <div class="actions">
+    <p>Nombre: {{ rol.nombre }}</p>
+    <p>Correo: {{ rol.correo }}</p>
+    <p>Teléfono: {{ rol.telefono }}</p>
+    <div class="botones">
       <button class="btn-update" (click)="actualizarRol(rol.id, rol.nombre + ' actualizado')">Actualizar</button>
       <button class="btn-delete" (click)="eliminarRol(rol.id)">Eliminar</button>
     </div>

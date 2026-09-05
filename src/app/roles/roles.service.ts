@@ -1,25 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
-interface Role {
+export interface Usuario {
   id: number;
   nombre: string;
+  correo: string;
+  telefono: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class RolesService {
-  private apiUrl = 'http://localhost:3000/roles';
+  private readonly apiUrl = 'http://127.0.0.1:8000/api/usuarios';
 
   constructor(private http: HttpClient) {}
 
-  actualizarRol(id: number, nombre: string): Observable<Role> {
-    return this.http.put<Role>(`${this.apiUrl}/${id}`, { nombre });
+  listarRoles() {
+    return this.http.get<Usuario[]>(`${this.apiUrl}/`);
   }
 
-  eliminarRol(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  actualizarRol(id: number, usuario: Usuario) {
+    return this.http.put<Usuario>(`${this.apiUrl}/${id}/`, usuario);
+  }
+
+  eliminarRol(id: number) {
+    return this.http.delete<void>(`${this.apiUrl}/${id}/`);
   }
 }

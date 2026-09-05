@@ -10,8 +10,8 @@ import { CommonModule } from '@angular/common';
 })
 export class Roles {
   roles = [
-    { id: 1, nombre: 'Administrador' },
-    { id: 2, nombre: 'Usuario' },
+    { id: 1, nombre: 'Administrador', correo: 'admin@demo.com', telefono: '111111111' },
+    { id: 2, nombre: 'Usuario', correo: 'usuario@demo.com', telefono: '222222222' },
   ];
 
   actualizarRol(id: number, nombre: string) {
