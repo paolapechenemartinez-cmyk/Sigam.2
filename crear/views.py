@@ -18,7 +18,7 @@ class CrearView(APIView):
         edad=request.data.get("edad")
         correo=request.data.get("correo")
         contraseña=request.data.get("contraseña")
-        usuarioNuevo=Crear.objects.create_User(
+        usuarioNuevo=Crear.objects.create(
             nombres=nombres,
             edad=edad,
             correo=correo,
