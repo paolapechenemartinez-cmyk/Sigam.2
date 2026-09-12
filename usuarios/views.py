@@ -7,7 +7,6 @@ from .serializers import UsuarioSerializer
 
 
 class LeerUsuarios(APIView):
-
     def get(self, request):
         usuarios = Usuario.objects.all()
         serializer = UsuarioSerializer(usuarios, many=True)
@@ -15,58 +14,31 @@ class LeerUsuarios(APIView):
 
 
 class CrearUsuario(APIView):
-
     def post(self, request):
         serializer = UsuarioSerializer(data=request.data)
-
         if serializer.is_valid():
             serializer.save()
-            return Response(
-                serializer.data,
-                status=status.HTTP_201_CREATED
-            )
-
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id):
         try:
             usuario = Usuario.objects.get(id=id)
         except Usuario.DoesNotExist:
-            return Response(
-                {'error': 'Usuario no encontrado'},
-                status=status.HTTP_404_NOT_FOUND
-            )
+            return Response({'error': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
 
-        serializer = UsuarioSerializer(
-            usuario,
-            data=request.data,
-            partial=True
-        )
+        serializer = UsuarioSerializer(usuario, data=request.data, partial=True)
 
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id):
         try:
             usuario = Usuario.objects.get(id=id)
         except Usuario.DoesNotExist:
-            return Response(
-                {'error': 'Usuario no encontrado'},
-                status=status.HTTP_404_NOT_FOUND
-            )
+            return Response({'error': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
 
         usuario.delete()
-
-        return Response(
-            {'mensaje': 'Usuario eliminado correctamente'},
-            status=status.HTTP_204_NO_CONTENT
-        )
+        return Response({'mensaje': 'Usuario eliminado correctamente'}, status=status.HTTP_204_NO_CONTENT)

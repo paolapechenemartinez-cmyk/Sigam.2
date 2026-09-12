@@ -20,6 +20,10 @@ export class RolesService {
     return this.http.get<Usuario[]>(`${this.apiUrl}/`);
   }
 
+  crearUsuario(usuario: Usuario) {
+    return this.http.post<Usuario>(`${this.apiUrl}/crear/`, usuario);
+  }
+
   actualizarRol(id: number, usuario: Usuario) {
     return this.http.put<Usuario>(`${this.apiUrl}/${id}/`, usuario);
   }
