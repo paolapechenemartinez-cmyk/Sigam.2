@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correo enviado</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .logo {
+            width: 90px;
+            height: 90px;
+            background: #ff7518;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 40px;
+            color: white;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .check {
+            font-size: 45px;
+            font-weight: normal;
+        }
+
+        h1 {
+            color: #1f2937;
+            font-size: 27px;
+            margin-bottom: 25px;
+        }
+
+        p {
+            color: #777777;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+
+        .boton {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 14px 25px;
+            background: #ff7518;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .boton:hover {
+            background: #e9650d;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <div class="logo">
+            <span class="check">✓</span>
+        </div>
+
+        <h1>
+            Correo enviado<br>
+            correctamente
+        </h1>
+
+        <p>
+            Hemos enviado un enlace para recuperar tu contraseña.
+        </p>
+
+        <p>
+            Revisa tu correo electrónico y sigue las instrucciones.
+        </p>
+
+        <a href="/recuperar/" class="boton">
+            Volver a recuperar contraseña
+        </a>
+
+    </div>
+
+</body>
+</html>
