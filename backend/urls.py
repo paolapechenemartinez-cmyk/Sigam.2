@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from backend.usuarios.views import login_usuario, inicio
+from backend.usuarios.views import login_usuario, inicio, logout_usuario
 
 
 urlpatterns = [
@@ -32,6 +32,14 @@ urlpatterns = [
         'login/',
         login_usuario,
         name='login'
+    ),
+
+    
+    # LOGOUT
+    path(
+        'logout/',
+        logout_usuario,
+        name='logout'
     ),
 
     # INICIO
