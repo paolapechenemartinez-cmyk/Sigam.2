@@ -24,7 +24,7 @@
       <!-- Documento y Teléfono -->
       <div class="form-row">
         <div class="form-group">
-          <label for="documento">Documento / Cédula *</label>
+          <label for="documento">Documento *</label>
           <input id="documento" type="text" formControlName="documento" placeholder="1098765432" [class.input-error]="isInvalid('documento')" />
           <small class="error-text" *ngIf="isInvalid('documento')">Ingresa un número de documento válido.</small>
         </div>
@@ -76,7 +76,7 @@
         <label for="aceptaTerminos">Acepto los términos, condiciones y tratamiento de datos médicos.</label>
       </div>
       <small class="error-text checkbox-error" *ngIf="isInvalid('aceptaTerminos')">Debes aceptar los términos para registrarte.</small>
-
+      
       <!-- Botón Submit -->
       <button type="submit" class="btn-submit" [disabled]="registerForm.invalid || isLoading">
         <span *ngIf="!isLoading">Registrar Usuario</span>
